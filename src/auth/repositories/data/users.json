@@ -1,0 +1,17 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "email": "user1@example.com",
+    "password": "password123"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "email": "user2@example.com",
+    "password": "securepass456"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440002",
+    "email": "user3@example.com",
+    "password": "mypassword789"
+  }
+]

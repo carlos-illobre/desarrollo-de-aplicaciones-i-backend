@@ -14,17 +14,18 @@ import { JwtService } from '@nestjs/jwt';
 import { SignInResponseDto } from '../dtos/sing-in.response.dto';
 import { ResetPasswordDto } from '../dtos/password-reset';
 import { ConfirmPasswordResetDto } from '../dtos/confirm-password-reset';
+import { MailingRepository } from '../repositories/mailing.repository';
 
 @Injectable()
 export class AuthService {
-  @Inject()
-  private usersRepo: UsersRepository;
-  @Inject()
-  private otpRepo: OtpRepository;
-  @Inject()
-  private jwtService: JwtService;
+  constructor(
+    private readonly usersRepo: UsersRepository,
+    private readonly otpRepo: OtpRepository,
+    private readonly jwtService: JwtService,
+    private readonly mailingRepo: MailingRepository,
+  ) {}
 
-  public signUp(body: SignUpDto) {
+  public async signUp(body: SignUpDto) {
     if (this.usersRepo.findByEmail(body.email)) {
       console.log('User already exists');
       throw new ConflictException('A user with this email already exists');
@@ -33,7 +34,6 @@ export class AuthService {
       throw new BadRequestException('Passwords do not match');
     }
 
-    //TODO: send opt to email
     const otp = this.otpRepo.createUserDataOtp(
       body.email,
       body.password,
@@ -41,6 +41,8 @@ export class AuthService {
     );
 
     console.log('OTP created successfully: ' + otp);
+
+    await this.mailingRepo.sendSignupEmail(body.email, otp);
   }
 
   public confirmSignUp(body: ConfirmSignUpDto) {
@@ -70,18 +72,19 @@ export class AuthService {
     };
   }
 
-  public passwordReset(body: ResetPasswordDto) {
+  public async passwordReset(body: ResetPasswordDto) {
     if (body.password !== body.passwordConfirmation) {
       throw new BadRequestException('Passwords do not match');
     }
 
-    //TODO: send email with otp
     const otp = this.otpRepo.createUserDataOtp(
       body.email,
       body.password,
       'PASSWORD_RESET',
     );
     console.log('OTP created successfully: ' + otp);
+
+    await this.mailingRepo.sendPasswordResetEmail(body.email, otp);
   }
 
   public confirmPassword(body: ConfirmPasswordResetDto) {

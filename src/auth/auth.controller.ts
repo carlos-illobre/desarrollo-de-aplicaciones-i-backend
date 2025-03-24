@@ -14,8 +14,8 @@ export class AuthController {
 
   @Public()
   @Post('signup')
-  signUp(@Body() body: SignUpDto) {
-    return this.authService.signUp(body);
+  async signUp(@Body() body: SignUpDto) {
+    return await this.authService.signUp(body);
   }
 
   @Public()
@@ -32,8 +32,8 @@ export class AuthController {
 
   @Public()
   @Post('password-reset')
-  resetPassword(@Body() body: ResetPasswordDto) {
-    return this.authService.passwordReset(body);
+  async resetPassword(@Body() body: ResetPasswordDto) {
+    return await this.authService.passwordReset(body);
   }
 
   @Public()

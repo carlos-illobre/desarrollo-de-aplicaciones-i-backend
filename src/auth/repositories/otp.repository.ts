@@ -1,5 +1,5 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { InMemoryCache } from 'src/common/inMemoryCache';
+import { InMemoryCache } from 'src/common/cache/inMemoryCache';
 import { generateOtp } from 'src/common/utils';
 
 const DEFAULT_TTL = '600000'; // 10 minutes
@@ -15,10 +15,7 @@ type UserData = {
 
 @Injectable()
 export class OtpRepository {
-  constructor(
-    @Inject()
-    private readonly cacheService: InMemoryCache,
-  ) {}
+  constructor(private readonly cacheService: InMemoryCache) {}
 
   private getKey(otp: string, type: OtpType): string {
     const prefix = type === 'SIGNUP' ? SIGNUP_PREFIX : PASSWORD_RESET_PREFIX;

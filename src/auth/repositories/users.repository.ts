@@ -5,7 +5,7 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { UserDto } from './dtos/users.dto';
-import * as users from './data/users.json';
+import users from './data/users.json';
 
 @Injectable()
 export class UsersRepository implements OnModuleInit {

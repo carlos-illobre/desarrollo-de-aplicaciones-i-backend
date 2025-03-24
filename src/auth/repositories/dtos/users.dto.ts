@@ -8,12 +8,10 @@ export class UserDto {
   id: string;
   email: string;
   password: string;
-  role: RoleEnum;
 
-  constructor(email: string, password: string, role: RoleEnum) {
+  constructor(email: string, password: string) {
     this.id = randomUUID();
     this.email = email;
     this.password = password;
-    this.role = role;
   }
 }

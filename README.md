@@ -32,6 +32,9 @@
 $ npm install
 ```
 
+## Configure
+To create the configuration copy the .env.example file and rename it as .env
+
 ## Compile and run the project
 
 ```bash
@@ -40,23 +43,6 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
 
 ## Resources
 

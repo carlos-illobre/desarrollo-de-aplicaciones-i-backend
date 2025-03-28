@@ -26,6 +26,10 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## NodeJS install
+
+Instal NodeJS by following the steps appropriate to your os as described in the [NodeJS Official Webpage](https://nodejs.org)
+
 ## Project setup
 
 ```bash
@@ -33,6 +37,7 @@ $ npm install
 ```
 
 ## Configure
+
 To create the configuration copy the .env.example file and rename it as .env
 
 ## Compile and run the project
@@ -56,3 +61,4 @@ Check out a few resources that may come in handy when working with NestJS:
 - Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
 - To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
 - Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```

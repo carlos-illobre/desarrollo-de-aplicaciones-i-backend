@@ -13,21 +13,17 @@ export class MailingRepository {
 
   async sendSignupEmail(recipient: string, otp: string): Promise<void> {
     this.mailingService.sendMail(
-      recipient,
-      //TODO: temporary until we fix the template issue
-      `${SIGNUP_SUBJECT} - ${otp}`,
-      SIGNUP_TEMPLATE_NAME,
-      { otp },
+      [recipient],
+      SIGNUP_SUBJECT,
+      `Tu OTP de registro es ${otp}. \n Por favor ingresalo en la pantalla correspondiente`,
     );
   }
 
   async sendPasswordResetEmail(recipient: string, otp: string): Promise<void> {
     this.mailingService.sendMail(
-      recipient,
-      //TODO: temporary until we fix the template issue
+      [recipient],
       `${PASSWORD_RESET_SUBJECT} - ${otp}`,
-      PASSWORD_RESET_TEMPLATE_NAME,
-      { otp },
+      `Tu OTP de reseteo de clave es: ${otp}. \n Por favor ingresalo en la pantalla correspondiente`,
     );
   }
 }

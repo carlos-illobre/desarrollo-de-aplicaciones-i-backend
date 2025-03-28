@@ -1,55 +1,82 @@
 import { Injectable } from '@nestjs/common';
-import * as nodemailer from 'nodemailer';
-import Email from 'email-templates';
-import * as path from 'path';
+import { EmailClient, KnownEmailSendStatus } from '@azure/communication-email';
 
-const FROM = '"DeRemate.com" <agus.drewes@outlook.com>';
+require('dotenv').config();
+
+const FROM_SENDER_ADDRESS = `<${process.env.FROM_EMAIL_ADDRESS ?? ''}>`;
 
 @Injectable()
 export class MailingService {
-  private readonly transporter: nodemailer.Transporter;
-  private readonly email: Email;
+  private readonly emailClient: EmailClient;
 
   constructor() {
-    this.transporter = nodemailer.createTransport({
-      host: 'localhost',
-      port: 1025, // MailHog's default SMTP port
-      secure: false, // No SSL for local SMTP
-    });
+    if (this.isMailingEnabled()) {
+      const connectionString =
+        process.env.COMMUNICATION_SERVICES_CONNECTION_STRING ?? '';
+      const emailClient = new EmailClient(connectionString);
 
-    // Configure email-templates
-    this.email = new Email({
-      message: {
-        from: FROM,
-      },
-      transport: this.transporter,
-      views: {
-        root: path.join(__dirname, 'templates'), // Path to your email templates folder
-        options: {
-          extension: 'pug', // Use Pug templates
-        },
-      },
-    });
+      this.emailClient = emailClient;
+    }
   }
 
-  async sendMail(
-    to: string,
-    subject: string,
-    template: string,
-    variables: Record<string, any>,
-  ): Promise<void> {
-    try {
-      await this.email.send({
-        template, // Template name (e.g., 'welcome')
-        message: {
-          to,
-          subject,
-        },
-        locals: variables, // Variables to pass to the template
-      });
-      console.log(`Email sent to ${to}`);
-    } catch (error) {
-      console.error('Error sending email:', error);
+  private isMailingEnabled(): boolean {
+    return process.env.MAILING_ENABLED === 'true';
+  }
+
+  async sendMail(to: string[], subject: string, body: string): Promise<void> {
+    const POLLER_WAIT_TIME = 10;
+
+    if (this.emailClient) {
+      try {
+        const message = {
+          senderAddress: FROM_SENDER_ADDRESS,
+          content: {
+            subject,
+            plainText: body,
+          },
+          recipients: {
+            to: to.map((recipient) => ({
+              address: recipient,
+              displayName: '',
+            })),
+          },
+        };
+
+        console.log('Sending email: ', JSON.stringify(message));
+        const poller = await this.emailClient.beginSend(message);
+
+        if (!poller.getOperationState().isStarted) {
+          throw 'Poller was not started.';
+        }
+
+        let timeElapsed = 0;
+        while (!poller.isDone()) {
+          poller.poll();
+          console.log('Email send polling in progress');
+
+          await new Promise((resolve) =>
+            setTimeout(resolve, POLLER_WAIT_TIME * 1000),
+          );
+          timeElapsed += 10;
+
+          if (timeElapsed > 18 * POLLER_WAIT_TIME) {
+            throw 'Polling timed out.';
+          }
+        }
+
+        if (poller.getResult()?.status == KnownEmailSendStatus.Succeeded) {
+          console.log(
+            `Successfully sent the email (operation id: ${poller.getResult()?.id})`,
+          );
+        } else {
+          throw poller.getResult()?.error;
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log('Mailing service is not enabled. Skipping email sending.');
+      console.log(`Email details: \n to: ${to}, subject: ${subject}`);
     }
   }
 }

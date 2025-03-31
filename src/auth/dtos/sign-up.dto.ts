@@ -5,6 +5,9 @@ export class SignUpDto {
   email: string;
 
   @IsString()
+  fullName: string;
+
+  @IsString()
   @IsNotEmpty()
   @MinLength(6)
   password: string;

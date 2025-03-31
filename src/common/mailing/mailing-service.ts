@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { EmailClient, KnownEmailSendStatus } from '@azure/communication-email';
-
-require('dotenv').config();
-
-const FROM_SENDER_ADDRESS = `<${process.env.FROM_EMAIL_ADDRESS ?? ''}>`;
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  EmailClient,
+  EmailMessage,
+  KnownEmailSendStatus,
+} from '@azure/communication-email';
+import previewEmail from 'preview-email';
 
 @Injectable()
 export class MailingService {
@@ -20,25 +21,32 @@ export class MailingService {
   }
 
   private isMailingEnabled(): boolean {
-    return process.env.MAILING_ENABLED === 'true';
+    return (
+      process.env.MAILING_ENABLED === 'true' &&
+      !!process.env.FROM_EMAIL_ADDRESS &&
+      !!process.env.COMMUNICATION_SERVICES_CONNECTION_STRING
+    );
   }
 
-  async sendMail(to: string[], subject: string, body: string): Promise<void> {
+  async sendMail(
+    to: { address: string; displayName: string },
+    subject: string,
+    body: string,
+  ): Promise<void> {
     const POLLER_WAIT_TIME = 10;
+
+    const senderAddress = process.env.FROM_EMAIL_ADDRESS ?? '';
 
     if (this.emailClient) {
       try {
-        const message = {
-          senderAddress: FROM_SENDER_ADDRESS,
+        const message: EmailMessage = {
+          senderAddress,
           content: {
             subject,
             plainText: body,
           },
           recipients: {
-            to: to.map((recipient) => ({
-              address: recipient,
-              displayName: '',
-            })),
+            to: [to],
           },
         };
 
@@ -73,10 +81,25 @@ export class MailingService {
         }
       } catch (e) {
         console.log(e);
+        throw new InternalServerErrorException(
+          'Error sending email, please try again later.',
+        );
       }
     } else {
-      console.log('Mailing service is not enabled. Skipping email sending.');
-      console.log(`Email details: \n to: ${to}, subject: ${subject}`);
+      console.log(
+        'Mailing service is not enabled. A preview email will be rendered.',
+      );
+
+      const message = {
+        from: 'test@gmail.com',
+        to: to.address,
+        subject: subject,
+        text: body,
+      };
+
+      previewEmail(message, { open: true })
+        .then(console.log)
+        .catch(console.error);
     }
   }
 }

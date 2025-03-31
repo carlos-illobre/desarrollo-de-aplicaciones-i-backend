@@ -2,16 +2,19 @@
   {
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "email": "miraquetecomohermano@example.com",
+    "fullName": "Dibu Martinez",
     "password": "password123"
   },
   {
     "id": "550e8400-e29b-41d4-a716-446655440001",
     "email": "lapulga@example.com",
+    "fullName": "Lionel Messi",
     "password": "securepass456"
   },
   {
     "id": "550e8400-e29b-41d4-a716-446655440002",
     "email": "diegote@example.com",
+    "fullName": "Diego Armando Maradona",
     "password": "mypassword789"
   }
 ]

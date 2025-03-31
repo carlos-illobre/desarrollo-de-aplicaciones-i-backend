@@ -1,17 +1,15 @@
 import { randomUUID } from 'node:crypto';
 
-export enum RoleEnum {
-  DELIVERY = 'delivery',
-  BUYER = 'buyer',
-}
 export class UserDto {
   id: string;
   email: string;
+  fullName: string;
   password: string;
 
-  constructor(email: string, password: string) {
+  constructor(email: string, fullName: string, password: string) {
     this.id = randomUUID();
     this.email = email;
+    this.fullName = fullName;
     this.password = password;
   }
 }

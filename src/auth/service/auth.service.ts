@@ -38,20 +38,21 @@ export class AuthService {
       body.email,
       body.password,
       'SIGNUP',
+      body.fullName,
     );
 
     console.log('OTP created successfully: ' + otp);
 
-    await this.mailingRepo.sendSignupEmail(body.email, otp);
+    this.mailingRepo.sendSignupEmail(body.email, body.fullName, otp);
   }
 
   public confirmSignUp(body: ConfirmSignUpDto) {
-    const { email, password } = this.otpRepo.getUserDataByOtp(
+    const { email, fullName, password } = this.otpRepo.getUserDataByOtp(
       body.otp,
       'SIGNUP',
     );
 
-    const user = this.usersRepo.create(email, password);
+    const user = this.usersRepo.create(email, fullName, password);
 
     this.otpRepo.deleteOtp(body.otp, 'SIGNUP');
     console.log('User created successfully: ' + JSON.stringify(user));
@@ -73,6 +74,12 @@ export class AuthService {
   }
 
   public async passwordReset(body: ResetPasswordDto) {
+    const user = this.usersRepo.findByEmail(body.email);
+
+    if (!user) {
+      console.log("The user doesn't exist, the email was not sent");
+      return;
+    }
     if (body.password !== body.passwordConfirmation) {
       throw new BadRequestException('Passwords do not match');
     }
@@ -84,7 +91,7 @@ export class AuthService {
     );
     console.log('OTP created successfully: ' + otp);
 
-    await this.mailingRepo.sendPasswordResetEmail(body.email, otp);
+    this.mailingRepo.sendPasswordResetEmail(body.email, user.fullName, otp);
   }
 
   public confirmPassword(body: ConfirmPasswordResetDto) {

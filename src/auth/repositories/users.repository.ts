@@ -24,8 +24,8 @@ export class UsersRepository implements OnModuleInit {
   }
 
   // Add a new user to the repository
-  public create(email: string, password: string) {
-    const user = new UserDto(email, password);
+  public create(email: string, fullName: string, password: string) {
+    const user = new UserDto(email, fullName, password);
     const existingUser = this.findByEmail(user.email);
 
     if (existingUser) throw new ConflictException('User already exists');

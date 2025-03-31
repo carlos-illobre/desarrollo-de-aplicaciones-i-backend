@@ -10,6 +10,7 @@ type OtpType = 'SIGNUP' | 'PASSWORD_RESET';
 
 type UserData = {
   email: string;
+  fullName: string;
   password: string;
 };
 
@@ -22,7 +23,12 @@ export class OtpRepository {
     return `${prefix}${otp}`;
   }
 
-  createUserDataOtp(email: string, password: string, type: OtpType): string {
+  createUserDataOtp(
+    email: string,
+    password: string,
+    type: OtpType,
+    fullName?: string,
+  ): string {
     let otp: string;
     do {
       otp = generateOtp();
@@ -30,7 +36,7 @@ export class OtpRepository {
 
     this.cacheService.set(
       this.getKey(otp, type),
-      { email, password },
+      { email, fullName, password },
       Number.parseInt(process.env.SIGNUP_OTP_TTL ?? DEFAULT_TTL),
     );
     return otp;

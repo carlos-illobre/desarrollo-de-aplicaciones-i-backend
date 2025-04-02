@@ -62,3 +62,21 @@ Check out a few resources that may come in handy when working with NestJS:
 - To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
 - Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 ```
+
+## Enable email sending functionality
+
+Emails in this application are sent using [Azure Communication Services](https://azure.microsoft.com/en-us/products/communication-services). When not configured the email will be rendered as a preview.
+
+To configure it to send real emails follow this steps:
+- Create an [Azure Portal](https://azure.microsoft.com/en-us/free/students) account using the student discount (with your .uade.ar email)
+- Create an email communication resource in azure following the steps described [here](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/email/create-email-communication-resource?pivots=platform-azp).
+- Copy the connection string from the keys section of the communication service created in the last step.
+- Add a free Azure managed subdomain following the steps described [here](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/email/add-azure-managed-domains?pivots=platform-azp)
+- Copy the default donotreply fromEmailAddress created automatically in the last step.
+- Configure the `.env` file by copying `.env.example` and modifying the following email related env variables:
+
+```
+COMMUNICATION_SERVICES_CONNECTION_STRING="your-connection-string"
+FROM_EMAIL_ADDRESS="donotreply@azuremanagedsubdomain.com"
+MAILING_ENABLED=true
+```

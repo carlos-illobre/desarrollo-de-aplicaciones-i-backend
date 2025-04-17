@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
-import { AuthService } from './service/auth.service';
+import { AuthService } from './auth.service';
 import { UsersRepository } from './repositories/users.repository';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from '../../common/guards/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { OtpRepository } from './repositories/otp.repository';
 import { MailingService } from 'src/common/mailing/mailing-service';

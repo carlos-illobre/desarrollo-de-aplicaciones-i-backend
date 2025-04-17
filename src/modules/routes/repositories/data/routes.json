@@ -1,0 +1,52 @@
+[
+  {
+    "packageId": "1e7b9c3e-8f3a-4a2b-9c3e-1e7b9c3e8f3a",
+    "warehouse": "Central Warehouse",
+    "destinationNeighborhood": "Palermo"
+  },
+  {
+    "packageId": "2a8c4d5f-9b6e-4c2a-8c4d-2a8c4d5f9b6e",
+    "warehouse": "North Warehouse",
+    "destinationNeighborhood": "Recoleta"
+  },
+  {
+    "packageId": "3b9d5e6f-7c8d-4b3b-9d5e-3b9d5e6f7c8d",
+    "warehouse": "East Warehouse",
+    "destinationNeighborhood": "San Telmo"
+  },
+  {
+    "packageId": "4c0e6f7g-6d9e-4c4c-0e6f-4c0e6f7g6d9e",
+    "warehouse": "West Warehouse",
+    "destinationNeighborhood": "Belgrano"
+  },
+  {
+    "packageId": "5d1f7g8h-5e0f-4d5d-1f7g-5d1f7g8h5e0f",
+    "warehouse": "South Warehouse",
+    "destinationNeighborhood": "Caballito"
+  },
+  {
+    "packageId": "6e2g8h9i-4f1g-4e6e-2g8h-6e2g8h9i4f1g",
+    "warehouse": "Central Warehouse",
+    "destinationNeighborhood": "Villa Crespo"
+  },
+  {
+    "packageId": "7f3h9i0j-3g2h-4f7f-3h9i-7f3h9i0j3g2h",
+    "warehouse": "North Warehouse",
+    "destinationNeighborhood": "Almagro"
+  },
+  {
+    "packageId": "8g4i0j1k-2h3i-4g8g-4i0j-8g4i0j1k2h3i",
+    "warehouse": "East Warehouse",
+    "destinationNeighborhood": "Villa Urquiza"
+  },
+  {
+    "packageId": "9h5j1k2l-1i4j-4h9h-5j1k-9h5j1k2l1i4j",
+    "warehouse": "West Warehouse",
+    "destinationNeighborhood": "Flores"
+  },
+  {
+    "packageId": "0i6k2l3m-0j5k-4i0i-6k2l-0i6k2l3m0j5k",
+    "warehouse": "South Warehouse",
+    "destinationNeighborhood": "La Boca"
+  }
+]

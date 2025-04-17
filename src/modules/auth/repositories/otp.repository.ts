@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InMemoryCache } from 'src/common/cache/inMemoryCache';
 import { generateOtp } from 'src/common/utils';
 

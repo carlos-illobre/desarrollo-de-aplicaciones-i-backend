@@ -1,20 +1,19 @@
 import {
   BadRequestException,
   ConflictException,
-  Inject,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { SignUpDto } from '../dtos/sign-up.dto';
-import { UsersRepository } from '../repositories/users.repository';
-import { SignInDto } from '../dtos/sign-in.dto';
-import { ConfirmSignUpDto } from '../dtos/confirm-sign-up.dto';
-import { OtpRepository } from '../repositories/otp.repository';
+import { SignUpDto } from './dtos/sign-up.dto';
+import { UsersRepository } from './repositories/users.repository';
+import { SignInDto } from './dtos/sign-in.dto';
+import { ConfirmSignUpDto } from './dtos/confirm-sign-up.dto';
+import { OtpRepository } from './repositories/otp.repository';
 import { JwtService } from '@nestjs/jwt';
-import { SignInResponseDto } from '../dtos/sing-in.response.dto';
-import { ResetPasswordDto } from '../dtos/password-reset';
-import { ConfirmPasswordResetDto } from '../dtos/confirm-password-reset';
-import { MailingRepository } from '../repositories/mailing.repository';
+import { SignInResponseDto } from './dtos/sing-in.response.dto';
+import { ResetPasswordDto } from './dtos/password-reset';
+import { ConfirmPasswordResetDto } from './dtos/confirm-password-reset';
+import { MailingRepository } from './repositories/mailing.repository';
 
 @Injectable()
 export class AuthService {
@@ -43,7 +42,7 @@ export class AuthService {
 
     console.log('OTP created successfully: ' + otp);
 
-    this.mailingRepo.sendSignupEmail(body.email, body.fullName, otp);
+    await this.mailingRepo.sendSignupEmail(body.email, body.fullName, otp);
   }
 
   public confirmSignUp(body: ConfirmSignUpDto) {
@@ -91,7 +90,11 @@ export class AuthService {
     );
     console.log('OTP created successfully: ' + otp);
 
-    this.mailingRepo.sendPasswordResetEmail(body.email, user.fullName, otp);
+    await this.mailingRepo.sendPasswordResetEmail(
+      body.email,
+      user.fullName,
+      otp,
+    );
   }
 
   public confirmPassword(body: ConfirmPasswordResetDto) {

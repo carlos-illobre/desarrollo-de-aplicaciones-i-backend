@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { SignUpDto } from './dtos/sign-up.dto';
-import { AuthService } from './service/auth.service';
+import { AuthService } from './auth.service';
 import { SignInDto } from './dtos/sign-in.dto';
 import { SignInResponseDto } from './dtos/sing-in.response.dto';
 import { Public } from 'src/common/decorators';

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { MailingService } from 'src/common/mailing/mailing-service';
-import { UserDto } from './dtos/users.dto';
 
 const SIGNUP_SUBJECT = 'Bienvenido a DeRemate.com!';
 const PASSWORD_RESET_SUBJECT = 'Solicitaste un cambio de clave en DeRemate.com';
@@ -26,7 +25,7 @@ export class MailingRepository {
     fullName: string,
     otp: string,
   ): Promise<void> {
-    this.mailingService.sendMail(
+    await this.mailingService.sendMail(
       { address: email, displayName: fullName },
       `${PASSWORD_RESET_SUBJECT} - ${otp}`,
       `Hola ${fullName}! \n\nTu OTP de reseteo de clave es: ${otp}. \nPor favor ingresalo en la pantalla correspondiente`,

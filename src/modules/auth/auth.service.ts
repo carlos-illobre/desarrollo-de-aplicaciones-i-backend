@@ -67,8 +67,10 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
+    const accessToken = this.jwtService.sign({ sub: user.email });
+
     return {
-      accessToken: this.jwtService.sign({ sub: user.email }),
+      accessToken,
     };
   }
 

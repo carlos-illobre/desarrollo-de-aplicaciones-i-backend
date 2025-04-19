@@ -1,33 +1,31 @@
 // entregaController.ts
 
-import { Request, Response } from 'express';
-import { EntregaService } from '../services/entregaService';
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Response } from 'express';
+import { EntregaService } from '../entregas/repositories/entregaService';
+import { Body, Controller, Get, HttpCode, InternalServerErrorException, NotFoundException, Param, Post, Req, Request } from '@nestjs/common';
+import { Public } from 'src/common/decorators';
+import { Entrega } from './repositories/dtos/entrega';
+import { AuthenticatedRequest } from 'src/common/authenticated-request';
 
-
+@Controller('entregas')
 export class EntregaController {
-  private entregaService: EntregaService;
 
-  constructor() {
-    this.entregaService = new EntregaService();
-  }
+  constructor(private readonly entregaService: EntregaService){}; 
 
-
-@Public()
 @HttpCode(200)
-@Post('entregas/:email')
-async getEntregasDelRepartidor(@Param('email') email: string) {
+@Get()
+async getEntregasDelRepartidor(@Req() request:AuthenticatedRequest ) {
   try {
-    const entregasDelRepartidor = await this.entregaService.getEntregasByRepartidorEmail(email);
+    const entregasDelRepartidor = await this.entregaService.getEntregasByRepartidorEmail(request.authUserEmail);
     return entregasDelRepartidor;
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-@Public()
+
 @HttpCode(200)
-@Get('entrega/:id')
+@Get(':id')
 async getEntregaById(@Param('id') id: string) {
   try {
     const entrega = await this.entregaService.getEntregaById(id);
@@ -41,4 +39,6 @@ async getEntregaById(@Param('id') id: string) {
     throw new Error(error.message);
   }
 }
+
+
 }

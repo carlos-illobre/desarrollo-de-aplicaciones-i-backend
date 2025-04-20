@@ -10,7 +10,7 @@ import { Request } from 'express';
 import { IS_PUBLIC_KEY } from 'src/common/decorators';
 
 type Payload = {
-  email: string;
+  sub: string;
 };
 
 @Injectable()
@@ -38,7 +38,7 @@ export class AuthGuard implements CanActivate {
     }
     try {
       const payload = this.jwtService.verify<Payload>(token);
-      request['authUserEmail'] = payload.email;
+      request['authUserEmail'] = payload.sub;
     } catch {
       throw new UnauthorizedException();
     }

@@ -1,42 +1,114 @@
 [
   {
-    "id": "a1f5b8c7-53b2-4d3a-a1a1-1f0d1234abcd",
-    "repartidorEmail": "juan.perez@mail.com",
+    "id": "d29a4c31-3e0f-4be3-90d4-7f96d2cdd0e1",
+    "repartidorEmail": "miraquetecomohermano@example.com",
     "cliente": "Carlos Gómez",
     "fechaEntrega": "2025-04-17",
     "estado": "En camino",
     "direccion": "Av. Siempre Viva 742"
   },
   {
-    "id": "b2e6c9d8-64c3-5e4b-b2b2-2f1e5678efgh",
+    "id": "a58fb2d2-3f14-4b75-9f8e-6932a62401ff",
     "repartidorEmail": "miraquetecomohermano@example.com",
-    "cliente": "Ana Fernández",
+    "cliente": "Martina López",
     "fechaEntrega": "2025-04-18",
     "estado": "Entregado",
     "direccion": "Calle Falsa 123"
   },
   {
-    "id": "c3f7d0e9-75d4-6f5c-c3c3-3f2f9101ijkl",
-    "repartidorEmail": "juan.perez@mail.com",
-    "cliente": "Martín Acosta",
+    "id": "ea57a01b-3c21-4bba-9b55-dbb0ee97c25c",
+    "repartidorEmail": "miraquetecomohermano@example.com",
+    "cliente": "Nicolás Pérez",
     "fechaEntrega": "2025-04-19",
     "estado": "Pendiente",
-    "direccion": "Av. Belgrano 456"
+    "direccion": "Boulevard Central 555"
   },
   {
-    "id": "b2e6c9d8-64c3-5e4b-b2b2-2f1e5678efgh",
-    "repartidorEmail": "lapulga@example.com",
-    "cliente": "Ana Fernández",
-    "fechaEntrega": "2025-04-18",
-    "estado": "Entregado",
-    "direccion": "Calle Falsa 123"
-  },
-  {
-    "id": "b2e6c9d8-64c3-5e4b-b2b2-2f1e5678efgh",
+    "id": "f239a8f1-932b-4870-a011-51a4d17e2d44",
     "repartidorEmail": "miraquetecomohermano@example.com",
-    "cliente": "Ana Fernández",
+    "cliente": "Julieta Fernández",
+    "fechaEntrega": "2025-04-20",
+    "estado": "Cancelado",
+    "direccion": "Av. Libertador 1000"
+  },
+  {
+    "id": "1453f2e1-9bdf-4e5a-8731-54ce88d2e5d7",
+    "repartidorEmail": "miraquetecomohermano@example.com",
+    "cliente": "Federico Ruiz",
+    "fechaEntrega": "2025-04-21",
+    "estado": "En camino",
+    "direccion": "Ruta 8 Km 45"
+  },
+  {
+    "id": "1d5a877e-d2c6-4b0c-92f6-ec1b0c7e9cf5",
+    "repartidorEmail": "miraquetecomohermano@example.com",
+    "cliente": "Sofía Méndez",
+    "fechaEntrega": "2025-04-22",
+    "estado": "Entregado",
+    "direccion": "Pasaje Los Cedros 89"
+  },
+  {
+    "id": "a967c1a0-0b9e-4d82-b1de-9fbf5c6af574",
+    "repartidorEmail": "miraquetecomohermano@example.com",
+    "cliente": "Tomás Herrera",
+    "fechaEntrega": "2025-04-23",
+    "estado": "Demorado",
+    "direccion": "Diagonal Norte 320"
+  },
+  {
+    "id": "ed64946a-3039-4c87-a8ad-f5874e2b8e12",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Carlos Gómez",
+    "fechaEntrega": "2025-04-17",
+    "estado": "En camino",
+    "direccion": "Av. Siempre Viva 742"
+  },
+  {
+    "id": "d35d5ad9-4298-4cb0-9552-b56da9b4be41",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Martina López",
     "fechaEntrega": "2025-04-18",
     "estado": "Entregado",
     "direccion": "Calle Falsa 123"
+  },
+  {
+    "id": "be985d8a-1e3a-40c4-8db1-5bc6c5d6e49a",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Nicolás Pérez",
+    "fechaEntrega": "2025-04-19",
+    "estado": "Pendiente",
+    "direccion": "Boulevard Central 555"
+  },
+  {
+    "id": "1f244588-1b17-4082-8ff1-dbc9cb1771b0",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Julieta Fernández",
+    "fechaEntrega": "2025-04-20",
+    "estado": "Cancelado",
+    "direccion": "Av. Libertador 1000"
+  },
+  {
+    "id": "f23e8434-1c1f-4d3c-870e-088a5cbad898",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Federico Ruiz",
+    "fechaEntrega": "2025-04-21",
+    "estado": "En camino",
+    "direccion": "Ruta 8 Km 45"
+  },
+  {
+    "id": "fc7630f0-d2c2-414a-bd1d-381ee5115e1b",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Sofía Méndez",
+    "fechaEntrega": "2025-04-22",
+    "estado": "Entregado",
+    "direccion": "Pasaje Los Cedros 89"
+  },
+  {
+    "id": "2e22f2f5-c0e0-4ad5-88ed-3d1d2dbcd7e3",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Tomás Herrera",
+    "fechaEntrega": "2025-04-23",
+    "estado": "Demorado",
+    "direccion": "Diagonal Norte 320"
   }
 ]

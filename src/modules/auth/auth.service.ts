@@ -42,7 +42,7 @@ export class AuthService {
 
     console.log('OTP created successfully: ' + otp);
 
-    await this.mailingRepo.sendSignupEmail(body.email, body.fullName, otp);
+    this.mailingRepo.sendSignupEmail(body.email, body.fullName, otp);
   }
 
   public confirmSignUp(body: ConfirmSignUpDto) {
@@ -92,7 +92,7 @@ export class AuthService {
     );
     console.log('OTP created successfully: ' + otp);
 
-    await this.mailingRepo.sendPasswordResetEmail(
+    this.mailingRepo.sendPasswordResetEmail(
       body.email,
       user.fullName,
       otp,

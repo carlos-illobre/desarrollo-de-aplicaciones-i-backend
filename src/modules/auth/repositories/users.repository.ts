@@ -5,6 +5,8 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { UserDto } from './dtos/users.dto';
+import * as fs from 'fs';
+import * as path from 'path';
 import users from './data/users.json';
 
 @Injectable()
@@ -23,6 +25,21 @@ export class UsersRepository implements OnModuleInit {
     }
   }
 
+  // Save users to the JSON file
+  private saveUsersToFile() {
+    const usersArray = Array.from(this.users.values());
+    try {
+      fs.writeFileSync(
+        './src/modules/auth/repositories/data/users.json',
+        JSON.stringify(usersArray, null, 2),
+        'utf-8',
+      );
+      console.log('File updated successfully');
+    } catch (error) {
+      console.error('Error writing to file:', error);
+    }
+  }
+
   // Add a new user to the repository
   public create(email: string, fullName: string, password: string) {
     const user = new UserDto(email, fullName, password);
@@ -30,6 +47,9 @@ export class UsersRepository implements OnModuleInit {
 
     if (existingUser) throw new ConflictException('User already exists');
     this.users.set(user.email, user);
+
+    //Update file with new user
+    this.saveUsersToFile();
     return user;
   }
 

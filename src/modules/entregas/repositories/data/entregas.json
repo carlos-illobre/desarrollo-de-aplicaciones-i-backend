@@ -1,42 +1,114 @@
 [
   {
-    "id": "a1f5b8c7-53b2-4d3a-a1a1-1f0d1234abcd",
-    "repartidorEmail": "juan.perez@mail.com",
+    "id": "100a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "miraquetecomohermano@example.com",
     "cliente": "Carlos Gómez",
     "fechaEntrega": "2025-04-17",
     "estado": "En camino",
     "direccion": "Av. Siempre Viva 742"
   },
   {
-    "id": "b2e6c9d8-64c3-5e4b-b2b2-2f1e5678efgh",
+    "id": "200a1b2c-1111-2222-3333-444455556666",
     "repartidorEmail": "miraquetecomohermano@example.com",
-    "cliente": "Ana Fernández",
+    "cliente": "Martina López",
     "fechaEntrega": "2025-04-18",
     "estado": "Entregado",
     "direccion": "Calle Falsa 123"
   },
   {
-    "id": "c3f7d0e9-75d4-6f5c-c3c3-3f2f9101ijkl",
-    "repartidorEmail": "juan.perez@mail.com",
-    "cliente": "Martín Acosta",
+    "id": "300a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "miraquetecomohermano@example.com",
+    "cliente": "Nicolás Pérez",
     "fechaEntrega": "2025-04-19",
     "estado": "Pendiente",
-    "direccion": "Av. Belgrano 456"
+    "direccion": "Boulevard Central 555"
   },
   {
-    "id": "b2e6c9d8-64c3-5e4b-b2b2-2f1e5678efgh",
-    "repartidorEmail": "lapulga@example.com",
-    "cliente": "Ana Fernández",
-    "fechaEntrega": "2025-04-18",
-    "estado": "Entregado",
-    "direccion": "Calle Falsa 123"
-  },
-  {
-    "id": "b2e6c9d8-64c3-5e4b-b2b2-2f1e5678efgh",
+    "id": "400a1b2c-1111-2222-3333-444455556666",
     "repartidorEmail": "miraquetecomohermano@example.com",
-    "cliente": "Ana Fernández",
+    "cliente": "Julieta Fernández",
+    "fechaEntrega": "2025-04-20",
+    "estado": "Cancelado",
+    "direccion": "Av. Libertador 1000"
+  },
+  {
+    "id": "500a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "miraquetecomohermano@example.com",
+    "cliente": "Federico Ruiz",
+    "fechaEntrega": "2025-04-21",
+    "estado": "En camino",
+    "direccion": "Ruta 8 Km 45"
+  },
+  {
+    "id": "600a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "miraquetecomohermano@example.com",
+    "cliente": "Sofía Méndez",
+    "fechaEntrega": "2025-04-22",
+    "estado": "Entregado",
+    "direccion": "Pasaje Los Cedros 89"
+  },
+  {
+    "id": "700a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "miraquetecomohermano@example.com",
+    "cliente": "Tomás Herrera",
+    "fechaEntrega": "2025-04-23",
+    "estado": "Demorado",
+    "direccion": "Diagonal Norte 320"
+  },
+  {
+    "id": "800a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Valentina Sosa",
+    "fechaEntrega": "2025-04-17",
+    "estado": "En camino",
+    "direccion": "Av. San Martín 700"
+  },
+  {
+    "id": "900a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Lucas Giménez",
     "fechaEntrega": "2025-04-18",
     "estado": "Entregado",
-    "direccion": "Calle Falsa 123"
+    "direccion": "Calle Los Robles 15"
+  },
+  {
+    "id": "a00a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Camila Castro",
+    "fechaEntrega": "2025-04-19",
+    "estado": "Pendiente",
+    "direccion": "Pasaje Mitre 66"
+  },
+  {
+    "id": "b00a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Matías Álvarez",
+    "fechaEntrega": "2025-04-20",
+    "estado": "Cancelado",
+    "direccion": "Diagonal Sur 810"
+  },
+  {
+    "id": "c00a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Florencia Vera",
+    "fechaEntrega": "2025-04-21",
+    "estado": "En camino",
+    "direccion": "Ruta 5 Km 20"
+  },
+  {
+    "id": "d00a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Gonzalo Ibáñez",
+    "fechaEntrega": "2025-04-22",
+    "estado": "Entregado",
+    "direccion": "Av. Los Álamos 555"
+  },
+  {
+    "id": "e00a1b2c-1111-2222-3333-444455556666",
+    "repartidorEmail": "lapulga@example.com",
+    "cliente": "Agustina Cabrera",
+    "fechaEntrega": "2025-04-23",
+    "estado": "Demorado",
+    "direccion": "Camino Real 99"
   }
 ]

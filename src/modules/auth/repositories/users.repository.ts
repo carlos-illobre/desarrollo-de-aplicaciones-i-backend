@@ -71,5 +71,7 @@ export class UsersRepository implements OnModuleInit {
     }
     user.password = password;
     this.users.set(email, user);
+    //Update file with new user
+    this.saveUsersToFile();
   }
 }

@@ -25,7 +25,6 @@ export class AuthController {
     return this.authService.confirmSignUp(body);
   }
 
-
   @Public()
   @HttpCode(200)
   @Post('signin')

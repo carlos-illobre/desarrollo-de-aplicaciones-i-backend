@@ -45,7 +45,9 @@ export class OtpRepository {
   getUserDataByOtp(otp: string, type: OtpType): UserData {
     const userData = this.cacheService.get(this.getKey(otp, type)) as UserData;
     if (!userData) {
-      throw new BadRequestException();
+      throw new BadRequestException(
+        'El código ingresado no es válido o ha expirado, por favor intente nuevamente',
+      );
     }
     return userData;
   }

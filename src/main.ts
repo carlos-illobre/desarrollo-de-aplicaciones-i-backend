@@ -18,6 +18,7 @@ async function bootstrap() {
 
   // Apply the logging interceptor globally
   app.useGlobalInterceptors(new LoggingInterceptor());
+  app.enableCors();
 
   await app.listen(process.env.PORT ?? 3000);
 }

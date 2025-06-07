@@ -16,5 +16,29 @@
     "email": "diegote@example.com",
     "fullName": "Diego Armando Maradona",
     "password": "mypassword789"
+  },
+  {
+    "id": "3c1a34ed-10b2-4a73-aa38-bfac2a3485f7",
+    "email": "agus.drewes@gmail.com",
+    "fullName": "Agustin Drewes",
+    "password": "123123"
+  },
+  {
+    "id": "04dfddbf-92fb-414a-8539-04d7085252dd",
+    "email": "agus.drewes2@gmail.com",
+    "fullName": "Agustin Drewes",
+    "password": "123123"
+  },
+  {
+    "id": "c3f011e4-0113-482a-8767-5e79220d8bb6",
+    "email": "agus.drewes3@gmail.com",
+    "fullName": "Agustin Drewes",
+    "password": "123123"
+  },
+  {
+    "id": "0a94e965-bc66-4360-a690-b9a026f84138",
+    "email": "agus.drewes4@gmail.com",
+    "fullName": "Agustin Drewes",
+    "password": "123123"
   }
 ]

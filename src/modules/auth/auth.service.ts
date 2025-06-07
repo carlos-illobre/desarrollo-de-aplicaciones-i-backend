@@ -24,13 +24,15 @@ export class AuthService {
     private readonly mailingRepo: MailingRepository,
   ) {}
 
-  public async signUp(body: SignUpDto) {
+  public signUp(body: SignUpDto) {
     if (this.usersRepo.findByEmail(body.email)) {
       console.log('User already exists');
-      throw new ConflictException('A user with this email already exists');
+      throw new ConflictException(
+        'Ya existe un usuario con ese email, por favor intente nuevamente con uno distinto',
+      );
     }
     if (body.password !== body.passwordConfirmation) {
-      throw new BadRequestException('Passwords do not match');
+      throw new BadRequestException('Las contraseñas no coinciden');
     }
 
     const otp = this.otpRepo.createUserDataOtp(
@@ -61,10 +63,12 @@ export class AuthService {
     const user = this.usersRepo.findByEmail(body.email);
     if (!user) {
       console.log('User not found');
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(
+        'El usuario no existe, por favor intente nuevamente',
+      );
     } else if (user.email !== body.email || user.password !== body.password) {
       console.log('Invalid credentials');
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Credenciales inválidas');
     }
 
     const accessToken = this.jwtService.sign({ sub: user.email });
@@ -74,7 +78,7 @@ export class AuthService {
     };
   }
 
-  public async passwordReset(body: ResetPasswordDto) {
+  public passwordReset(body: ResetPasswordDto) {
     const user = this.usersRepo.findByEmail(body.email);
 
     if (!user) {
@@ -92,11 +96,7 @@ export class AuthService {
     );
     console.log('OTP created successfully: ' + otp);
 
-    this.mailingRepo.sendPasswordResetEmail(
-      body.email,
-      user.fullName,
-      otp,
-    );
+    this.mailingRepo.sendPasswordResetEmail(body.email, user.fullName, otp);
   }
 
   public confirmPassword(body: ConfirmPasswordResetDto) {

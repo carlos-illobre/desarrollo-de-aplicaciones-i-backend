@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { UserDto } from './dtos/users.dto';
 import * as fs from 'fs';
-import * as path from 'path';
 import users from './data/users.json';
 
 @Injectable()
@@ -45,7 +44,8 @@ export class UsersRepository implements OnModuleInit {
     const user = new UserDto(email, fullName, password);
     const existingUser = this.findByEmail(user.email);
 
-    if (existingUser) throw new ConflictException('User already exists');
+    if (existingUser)
+      throw new ConflictException('Ya hay un usuario registrado con ese email');
     this.users.set(user.email, user);
 
     //Update file with new user

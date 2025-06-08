@@ -64,7 +64,7 @@ export class AuthService {
     if (!user) {
       console.log('User not found');
       throw new UnauthorizedException(
-        'El usuario no existe, por favor intente nuevamente',
+        'El usuario no existe. Verifique el email ingresado e intente nuevamente',
       );
     } else if (user.email !== body.email || user.password !== body.password) {
       console.log('Invalid credentials');

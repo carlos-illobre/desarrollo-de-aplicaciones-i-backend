@@ -15,8 +15,8 @@ export class AuthController {
   @Public()
   @HttpCode(204)
   @Post('signup')
-  async signUp(@Body() body: SignUpDto) {
-    return await this.authService.signUp(body);
+  signUp(@Body() body: SignUpDto) {
+    return this.authService.signUp(body);
   }
 
   @Public()
@@ -35,8 +35,8 @@ export class AuthController {
   @Public()
   @HttpCode(204)
   @Post('password-reset')
-  async resetPassword(@Body() body: ResetPasswordDto) {
-    return await this.authService.passwordReset(body);
+  resetPassword(@Body() body: ResetPasswordDto) {
+    return this.authService.passwordReset(body);
   }
 
   @Public()

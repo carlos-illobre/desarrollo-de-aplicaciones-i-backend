@@ -38,6 +38,7 @@ Delivery Routes API - A NestJS-based backend application for managing delivery r
 ## API Endpoints
 
 ### Authentication
+
 - `POST /auth/sign-in` - User authentication, returns JWT token
 - `POST /auth/sign-up` - User registration
 - `POST /auth/confirm-sign-up` - Confirm user registration with OTP
@@ -45,6 +46,7 @@ Delivery Routes API - A NestJS-based backend application for managing delivery r
 - `POST /auth/confirm-password-reset` - Confirm password reset with OTP
 
 ### Routes Management
+
 - `GET /routes/pending` - Get all pending routes available for assignment
 - `GET /routes/assigned` - Get assigned routes for authenticated delivery person
 - `GET /routes/assigned/:id` - Get full details of a specific assigned route
@@ -53,6 +55,7 @@ Delivery Routes API - A NestJS-based backend application for managing delivery r
 - `POST /routes/:id/cancel` - Cancel assigned route and return to pending status
 
 ## Route Status Flow
+
 ```
 PENDING → ON_ROUTE → COMPLETED
     ↖               ↙
@@ -125,62 +128,30 @@ $ npm run start:prod
 ### Using Postman
 
 1. **Authentication Setup**
+
    - Create a POST request to `/auth/sign-in`
    - Body: `{ "email": "user@example.com", "password": "password123" }`
    - Copy the returned JWT token
 
 2. **Add Authorization Header**
+
    - For all route endpoints, add header: `Authorization: Bearer <your-jwt-token>`
 
 3. **Example Requests**
+
    ```bash
    # Get pending routes
    GET /routes/pending
-   
+
    # Assign a route
    POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/assign
-   
+
    # Deliver a route (use the generated confirmation code)
    POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/deliver/123456
-   
+
    # Cancel a route
    POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/cancel
    ```
-
-### Postman Pre-request Script for Auto-Authentication
-
-```javascript
-// Pre-request Script
-const signInUrl = 'http://localhost:3000/auth/sign-in';
-const email = 'deliveryPerson@example.com';
-const password = 'password123';
-
-const token = pm.environment.get('jwt_token');
-const tokenExpiry = pm.environment.get('token_expiry');
-
-if (!token || !tokenExpiry || Date.now() > parseInt(tokenExpiry)) {
-    pm.sendRequest({
-        url: signInUrl,
-        method: 'POST',
-        header: { 'Content-Type': 'application/json' },
-        body: {
-            mode: 'raw',
-            raw: JSON.stringify({ email: email, password: password })
-        }
-    }, function (err, res) {
-        if (err) {
-            console.log('Error during sign-in:', err);
-        } else {
-            const responseJson = res.json();
-            if (responseJson.token) {
-                pm.environment.set('jwt_token', responseJson.token);
-                pm.environment.set('token_expiry', Date.now() + (60 * 60 * 1000)); // 1 hour
-                console.log('Token refreshed successfully');
-            }
-        }
-    });
-}
-```
 
 ## Security Features
 
@@ -193,6 +164,7 @@ if (!token || !tokenExpiry || Date.now() > parseInt(tokenExpiry)) {
 ## Error Handling
 
 The API returns standard HTTP status codes:
+
 - `200` - Success
 - `400` - Bad Request (validation errors)
 - `401` - Unauthorized (invalid/missing token)
@@ -212,13 +184,13 @@ Check out a few resources that may come in handy when working with NestJS:
 - Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
 - To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
 - Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-```
 
 ## Enable email sending functionality
 
 Emails in this application are sent using [Azure Communication Services](https://azure.microsoft.com/en-us/products/communication-services). When not configured the email will be rendered as a preview.
 
 To configure it to send real emails follow this steps:
+
 - Create an [Azure Portal](https://azure.microsoft.com/en-us/free/students) account using the student discount (with your .uade.ar email)
 - Create an email communication resource in azure following the steps described [here](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/email/create-email-communication-resource?pivots=platform-azp).
 - Copy the connection string from the keys section of the communication service created in the last step.
@@ -227,7 +199,9 @@ To configure it to send real emails follow this steps:
 - Configure the `.env` file by copying `.env.example` and modifying the following email related env variables:
 
 ```
+
 COMMUNICATION_SERVICES_CONNECTION_STRING="your-connection-string"
 FROM_EMAIL_ADDRESS="donotreply@azuremanagedsubdomain.com"
 MAILING_ENABLED=true
+
 ```

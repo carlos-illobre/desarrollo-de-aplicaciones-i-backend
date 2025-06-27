@@ -183,7 +183,7 @@ export class RoutesService {
       );
     }
 
-    if (route.delivery?.deliveryPersonId !== user.id) {
+    if (route.delivery!.deliveryPersonId !== user.id) {
       throw new ForbiddenException(
         `Route with ID ${routeId} is not assigned to this delivery person`,
       );

@@ -62,6 +62,14 @@ PENDING → ON_ROUTE → COMPLETED
       (cancel route)
 ```
 
+> **📋 For detailed flow diagrams and validation rules, see [Route_Lifecycle_Flow.md](./Route_Lifecycle_Flow.md)**
+
+**Status Transitions:**
+
+- **PENDING** → **ON_ROUTE**: When a delivery person assigns a route to themselves
+- **ON_ROUTE** → **COMPLETED**: When delivery is confirmed with the generated confirmation code
+- **ON_ROUTE** → **PENDING**: When the assigned delivery person cancels the route
+
 ## NodeJS install
 
 Instal NodeJS by following the steps appropriate to your os as described in the [NodeJS Official Webpage](https://nodejs.org)

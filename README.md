@@ -24,7 +24,40 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Delivery Routes API - A NestJS-based backend application for managing delivery routes with JWT authentication. The system handles route assignments, deliveries, and cancellations with proper validation and authorization.
+
+## Features
+
+- **JWT Authentication**: Secure authentication for all endpoints
+- **Route Management**: Complete CRUD operations for delivery routes
+- **Automatic OTP Generation**: Dynamic delivery confirmation codes
+- **Data Persistence**: JSON file-based storage with in-memory caching
+- **Role-based Access**: Users can only access their assigned routes
+- **Status Workflow**: Proper route lifecycle management
+
+## API Endpoints
+
+### Authentication
+- `POST /auth/sign-in` - User authentication, returns JWT token
+- `POST /auth/sign-up` - User registration
+- `POST /auth/confirm-sign-up` - Confirm user registration with OTP
+- `POST /auth/password-reset` - Request password reset
+- `POST /auth/confirm-password-reset` - Confirm password reset with OTP
+
+### Routes Management
+- `GET /routes/pending` - Get all pending routes available for assignment
+- `GET /routes/assigned` - Get assigned routes for authenticated delivery person
+- `GET /routes/assigned/:id` - Get full details of a specific assigned route
+- `POST /routes/:id/assign` - Assign a pending route to authenticated delivery person
+- `POST /routes/:id/deliver/:confirmationCode` - Mark route as delivered
+- `POST /routes/:id/cancel` - Cancel assigned route and return to pending status
+
+## Route Status Flow
+```
+PENDING → ON_ROUTE → COMPLETED
+    ↖               ↙
+      (cancel route)
+```
 
 ## NodeJS install
 
@@ -40,6 +73,40 @@ $ npm install
 
 To create the configuration copy the .env.example file and rename it as .env
 
+## Environment Variables
+
+Create a `.env` file from `.env.example` and configure:
+
+```bash
+# JWT Configuration
+JWT_SECRET="your-jwt-secret-key"
+
+# Email Configuration (Optional)
+COMMUNICATION_SERVICES_CONNECTION_STRING="your-azure-connection-string"
+FROM_EMAIL_ADDRESS="donotreply@azuremanagedsubdomain.com"
+MAILING_ENABLED=true
+```
+
+## Project Structure
+
+```
+src/
+├── common/              # Shared utilities and guards
+│   ├── guards/         # Authentication guards
+│   ├── interceptors/   # Logging interceptors
+│   ├── cache/          # In-memory caching
+│   └── utils.ts        # Utility functions (OTP generation)
+├── modules/
+│   ├── auth/           # Authentication module
+│   │   ├── repositories/  # User data management
+│   │   └── dtos/       # Data transfer objects
+│   └── routes/         # Routes management module
+│       ├── repositories/  # Route data management
+│       ├── dtos/       # Route DTOs and responses
+│       └── data/       # JSON data files
+└── main.ts             # Application entry point
+```
+
 ## Compile and run the project
 
 ```bash
@@ -48,6 +115,90 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Testing the API
+
+### Using Postman
+
+1. **Authentication Setup**
+   - Create a POST request to `/auth/sign-in`
+   - Body: `{ "email": "user@example.com", "password": "password123" }`
+   - Copy the returned JWT token
+
+2. **Add Authorization Header**
+   - For all route endpoints, add header: `Authorization: Bearer <your-jwt-token>`
+
+3. **Example Requests**
+   ```bash
+   # Get pending routes
+   GET /routes/pending
+   
+   # Assign a route
+   POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/assign
+   
+   # Deliver a route (use the generated confirmation code)
+   POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/deliver/123456
+   
+   # Cancel a route
+   POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/cancel
+   ```
+
+### Postman Pre-request Script for Auto-Authentication
+
+```javascript
+// Pre-request Script
+const signInUrl = 'http://localhost:3000/auth/sign-in';
+const email = 'deliveryPerson@example.com';
+const password = 'password123';
+
+const token = pm.environment.get('jwt_token');
+const tokenExpiry = pm.environment.get('token_expiry');
+
+if (!token || !tokenExpiry || Date.now() > parseInt(tokenExpiry)) {
+    pm.sendRequest({
+        url: signInUrl,
+        method: 'POST',
+        header: { 'Content-Type': 'application/json' },
+        body: {
+            mode: 'raw',
+            raw: JSON.stringify({ email: email, password: password })
+        }
+    }, function (err, res) {
+        if (err) {
+            console.log('Error during sign-in:', err);
+        } else {
+            const responseJson = res.json();
+            if (responseJson.token) {
+                pm.environment.set('jwt_token', responseJson.token);
+                pm.environment.set('token_expiry', Date.now() + (60 * 60 * 1000)); // 1 hour
+                console.log('Token refreshed successfully');
+            }
+        }
+    });
+}
+```
+
+## Security Features
+
+- **JWT Authentication**: All endpoints require valid authentication
+- **User Authorization**: Users can only access their assigned routes
+- **Automatic OTP Generation**: Delivery confirmation codes generated per assignment
+- **Status Validation**: Strict status transition rules
+- **Data Persistence**: All changes automatically saved to JSON files
+
+## Error Handling
+
+The API returns standard HTTP status codes:
+- `200` - Success
+- `400` - Bad Request (validation errors)
+- `401` - Unauthorized (invalid/missing token)
+- `403` - Forbidden (insufficient permissions)
+- `404` - Not Found (resource doesn't exist)
+- `500` - Internal Server Error
 
 ## Resources
 

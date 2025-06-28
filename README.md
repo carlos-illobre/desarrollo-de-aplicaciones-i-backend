@@ -24,7 +24,51 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Delivery Routes API - A NestJS-based backend application for managing delivery routes with JWT authentication. The system handles route assignments, deliveries, and cancellations with proper validation and authorization.
+
+## Features
+
+- **JWT Authentication**: Secure authentication for all endpoints
+- **Route Management**: Complete CRUD operations for delivery routes
+- **Automatic OTP Generation**: Dynamic delivery confirmation codes
+- **Data Persistence**: JSON file-based storage with in-memory caching
+- **Role-based Access**: Users can only access their assigned routes
+- **Status Workflow**: Proper route lifecycle management
+
+## API Endpoints
+
+### Authentication
+
+- `POST /auth/sign-in` - User authentication, returns JWT token
+- `POST /auth/sign-up` - User registration
+- `POST /auth/confirm-sign-up` - Confirm user registration with OTP
+- `POST /auth/password-reset` - Request password reset
+- `POST /auth/confirm-password-reset` - Confirm password reset with OTP
+
+### Routes Management
+
+- `GET /routes/pending` - Get all pending routes available for assignment
+- `GET /routes/assigned` - Get assigned routes for authenticated delivery person
+- `GET /routes/assigned/:id` - Get full details of a specific assigned route
+- `POST /routes/:id/assign` - Assign a pending route to authenticated delivery person
+- `POST /routes/:id/deliver/:confirmationCode` - Mark route as delivered
+- `POST /routes/:id/cancel` - Cancel assigned route and return to pending status
+
+## Route Status Flow
+
+```
+PENDING → ON_ROUTE → COMPLETED
+    ↖               ↙
+      (cancel route)
+```
+
+> **📋 For detailed flow diagrams and validation rules, see [Route_Lifecycle_Flow.md](./Route_Lifecycle_Flow.md)**
+
+**Status Transitions:**
+
+- **PENDING** → **ON_ROUTE**: When a delivery person assigns a route to themselves
+- **ON_ROUTE** → **COMPLETED**: When delivery is confirmed with the generated confirmation code
+- **ON_ROUTE** → **PENDING**: When the assigned delivery person cancels the route
 
 ## NodeJS install
 
@@ -40,6 +84,40 @@ $ npm install
 
 To create the configuration copy the .env.example file and rename it as .env
 
+## Environment Variables
+
+Create a `.env` file from `.env.example` and configure:
+
+```bash
+# JWT Configuration
+JWT_SECRET="your-jwt-secret-key"
+
+# Email Configuration (Optional)
+COMMUNICATION_SERVICES_CONNECTION_STRING="your-azure-connection-string"
+FROM_EMAIL_ADDRESS="donotreply@azuremanagedsubdomain.com"
+MAILING_ENABLED=true
+```
+
+## Project Structure
+
+```
+src/
+├── common/              # Shared utilities and guards
+│   ├── guards/         # Authentication guards
+│   ├── interceptors/   # Logging interceptors
+│   ├── cache/          # In-memory caching
+│   └── utils.ts        # Utility functions (OTP generation)
+├── modules/
+│   ├── auth/           # Authentication module
+│   │   ├── repositories/  # User data management
+│   │   └── dtos/       # Data transfer objects
+│   └── routes/         # Routes management module
+│       ├── repositories/  # Route data management
+│       ├── dtos/       # Route DTOs and responses
+│       └── data/       # JSON data files
+└── main.ts             # Application entry point
+```
+
 ## Compile and run the project
 
 ```bash
@@ -48,6 +126,59 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Testing the API
+
+### Using Postman
+
+1. **Authentication Setup**
+
+   - Create a POST request to `/auth/sign-in`
+   - Body: `{ "email": "user@example.com", "password": "password123" }`
+   - Copy the returned JWT token
+
+2. **Add Authorization Header**
+
+   - For all route endpoints, add header: `Authorization: Bearer <your-jwt-token>`
+
+3. **Example Requests**
+
+   ```bash
+   # Get pending routes
+   GET /routes/pending
+
+   # Assign a route
+   POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/assign
+
+   # Deliver a route (use the generated confirmation code)
+   POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/deliver/123456
+
+   # Cancel a route
+   POST /routes/1d9319ff-e1d4-452e-9a71-7df1985a8c14/cancel
+   ```
+
+## Security Features
+
+- **JWT Authentication**: All endpoints require valid authentication
+- **User Authorization**: Users can only access their assigned routes
+- **Automatic OTP Generation**: Delivery confirmation codes generated per assignment
+- **Status Validation**: Strict status transition rules
+- **Data Persistence**: All changes automatically saved to JSON files
+
+## Error Handling
+
+The API returns standard HTTP status codes:
+
+- `200` - Success
+- `400` - Bad Request (validation errors)
+- `401` - Unauthorized (invalid/missing token)
+- `403` - Forbidden (insufficient permissions)
+- `404` - Not Found (resource doesn't exist)
+- `500` - Internal Server Error
 
 ## Resources
 
@@ -61,13 +192,13 @@ Check out a few resources that may come in handy when working with NestJS:
 - Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
 - To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
 - Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-```
 
 ## Enable email sending functionality
 
 Emails in this application are sent using [Azure Communication Services](https://azure.microsoft.com/en-us/products/communication-services). When not configured the email will be rendered as a preview.
 
 To configure it to send real emails follow this steps:
+
 - Create an [Azure Portal](https://azure.microsoft.com/en-us/free/students) account using the student discount (with your .uade.ar email)
 - Create an email communication resource in azure following the steps described [here](https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/email/create-email-communication-resource?pivots=platform-azp).
 - Copy the connection string from the keys section of the communication service created in the last step.
@@ -76,7 +207,9 @@ To configure it to send real emails follow this steps:
 - Configure the `.env` file by copying `.env.example` and modifying the following email related env variables:
 
 ```
+
 COMMUNICATION_SERVICES_CONNECTION_STRING="your-connection-string"
 FROM_EMAIL_ADDRESS="donotreply@azuremanagedsubdomain.com"
 MAILING_ENABLED=true
+
 ```

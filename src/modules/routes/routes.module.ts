@@ -5,6 +5,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { RoutesController } from './routes.controller';
 import { RoutesService } from './routes.service';
 import { RoutesRepository } from './repositories/routes.repository';
+import { UsersRepository } from '../auth/repositories/users.repository';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { RoutesRepository } from './repositories/routes.repository';
     },
     RoutesService,
     RoutesRepository,
+    UsersRepository,
   ],
 })
 export class RoutesModule {}

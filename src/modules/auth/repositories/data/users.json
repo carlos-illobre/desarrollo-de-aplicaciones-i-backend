@@ -16,5 +16,11 @@
     "email": "diegote@example.com",
     "fullName": "Diego Armando Maradona",
     "password": "mypassword789"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440003",
+    "email": "agus.drewes@gmail.com",
+    "fullName": "Agustin Drewes",
+    "password": "123123"
   }
 ]

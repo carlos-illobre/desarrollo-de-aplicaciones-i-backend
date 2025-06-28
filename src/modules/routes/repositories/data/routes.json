@@ -1,52 +1,238 @@
 [
   {
-    "packageId": "1d9319ff-e1d4-452e-9a71-7df1985a8c14",
-    "warehouse": "Almacén Central",
-    "destinationNeighborhood": "Palermo"
+    "id": "1d9319ff-e1d4-452e-9a71-7df1985a8c14",
+    "warehouse": {
+      "name": "Almacén Central",
+      "section": "A3",
+      "shelf": "123"
+    },
+    "status": "pending",
+    "clientName": "Ana María Rodriguez",
+    "destination": {
+      "neighborhood": "Palermo",
+      "address": "Av. Santa Fe 3253, C1425BGI CABA, Argentina",
+      "coordinates": {
+        "lat": -34.5884,
+        "lng": -58.3974
+      }
+    }
   },
   {
-    "packageId": "ed54f7ab-375f-410f-9961-d6b96d5ad5e4",
-    "warehouse": "Almacén Norte",
-    "destinationNeighborhood": "Recoleta"
+    "id": "ed54f7ab-375f-410f-9961-d6b96d5ad5e4",
+    "warehouse": {
+      "name": "Almacén Norte",
+      "section": "B2",
+      "shelf": "456"
+    },
+    "status": "on_route",
+    "clientName": "Carlos Mendoza",
+    "delivery": {
+      "assignedAt": "2025-06-24T09:30:00.000Z",
+      "deliveryPersonId": "550e8400-e29b-41d4-a716-446655440000",
+      "deliveryConfirmationCode": "789012"
+    },
+    "destination": {
+      "neighborhood": "Recoleta",
+      "address": "Av. Alvear 1891, C1129AAD CABA, Argentina",
+      "coordinates": {
+        "lat": -34.5934,
+        "lng": -58.3933
+      }
+    }
   },
   {
-    "packageId": "768eda0b-44fb-40ab-beea-a33a3c784bcf",
-    "warehouse": "Almacén Este",
-    "destinationNeighborhood": "San Telmo"
+    "id": "768eda0b-44fb-40ab-beea-a33a3c784bcf",
+    "warehouse": {
+      "name": "Almacén Este",
+      "section": "C1",
+      "shelf": "789"
+    },
+    "status": "completed",
+    "clientName": "María Fernanda Silva",
+    "delivery": {
+      "assignedAt": "2025-06-23T09:15:00.000Z",
+      "deliveredAt": "2025-06-24T14:45:00.000Z",
+      "deliveryPersonId": "550e8400-e29b-41d4-a716-446655440001",
+      "deliveryConfirmationCode": "890123"
+    },
+    "destination": {
+      "neighborhood": "San Telmo",
+      "address": "Defensa 755, C1065AAO CABA, Argentina",
+      "coordinates": {
+        "lat": -34.6158,
+        "lng": -58.3731
+      }
+    }
   },
   {
-    "packageId": "d1d94660-a7b3-47ce-b963-39ab4f0fcc32",
-    "warehouse": "Almacén Oeste",
-    "destinationNeighborhood": "Belgrano"
+    "id": "768eda0b-44fb-40ab-beea-a33a3c784bce",
+    "warehouse": {
+      "name": "Almacén Oeste",
+      "section": "Z1",
+      "shelf": "324"
+    },
+    "status": "on_route",
+    "clientName": "Pepe Argento",
+    "delivery": {
+      "assignedAt": "2025-06-23T09:15:00.000Z",
+      "deliveryPersonId": "550e8400-e29b-41d4-a716-446655440001",
+      "deliveryConfirmationCode": "890123"
+    },
+    "destination": {
+      "neighborhood": "Flores",
+      "address": "Defensa 755, C1065AAO CABA, Argentina",
+      "coordinates": {
+        "lat": -34.6158,
+        "lng": -58.3731
+      }
+    }
   },
   {
-    "packageId": "fc7bd8a2-4b55-4a16-bd88-593c5c814eff",
-    "warehouse": "Almacén Sur",
-    "destinationNeighborhood": "Caballito"
+    "id": "d1d94660-a7b3-47ce-b963-39ab4f0fcc32",
+    "warehouse": {
+      "name": "Almacén Oeste",
+      "section": "D4",
+      "shelf": "1234"
+    },
+    "status": "pending",
+    "clientName": "Roberto Martínez",
+    "destination": {
+      "neighborhood": "Belgrano",
+      "address": "Av. Cabildo 2101, C1428AAI CABA, Argentina",
+      "coordinates": {
+        "lat": -34.5629,
+        "lng": -58.4519
+      }
+    }
   },
   {
-    "packageId": "0dce39ef-210d-42b3-bc8f-c25efa2185ff",
-    "warehouse": "Almacén Central",
-    "destinationNeighborhood": "Villa Crespo"
+    "id": "fc7bd8a2-4b55-4a16-bd88-593c5c814eff",
+    "warehouse": {
+      "name": "Almacén Sur",
+      "section": "E3",
+      "shelf": "567"
+    },
+    "status": "on_route",
+    "clientName": "Laura González",
+    "delivery": {
+      "assignedAt": "2025-06-25T11:15:00.000Z",
+      "deliveryPersonId": "550e8400-e29b-41d4-a716-446655440001",
+      "deliveryConfirmationCode": "901234"
+    },
+    "destination": {
+      "neighborhood": "Caballito",
+      "address": "Av. Rivadavia 5025, C1424CEE CABA, Argentina",
+      "coordinates": {
+        "lat": -34.6197,
+        "lng": -58.437
+      }
+    }
   },
   {
-    "packageId": "6ea02831-28ed-4a2f-8529-9108be5a1cd4",
-    "warehouse": "Almacén Norte",
-    "destinationNeighborhood": "Almagro"
+    "id": "0dce39ef-210d-42b3-bc8f-c25efa2185ff",
+    "warehouse": {
+      "name": "Almacén Central",
+      "section": "F2",
+      "shelf": "890"
+    },
+    "status": "completed",
+    "clientName": "Diego Herrera",
+    "delivery": {
+      "assignedAt": "2025-06-22T10:30:00.000Z",
+      "deliveredAt": "2025-06-22T16:20:00.000Z",
+      "deliveryPersonId": "550e8400-e29b-41d4-a716-446655440000",
+      "deliveryConfirmationCode": "012345"
+    },
+    "destination": {
+      "neighborhood": "Villa Crespo",
+      "address": "Av. Corrientes 4247, C1195AAE CABA, Argentina",
+      "coordinates": {
+        "lat": -34.5988,
+        "lng": -58.4373
+      }
+    }
   },
   {
-    "packageId": "8c8d8e04-f58b-4613-8011-5ca8e5917709",
-    "warehouse": "Almacén Este",
-    "destinationNeighborhood": "Villa Urquiza"
+    "id": "6ea02831-28ed-4a2f-8529-9108be5a1cd4",
+    "warehouse": {
+      "name": "Almacén Norte",
+      "section": "G1",
+      "shelf": "12345"
+    },
+    "status": "pending",
+    "clientName": "Patricia Romero",
+    "destination": {
+      "neighborhood": "Almagro",
+      "address": "Av. Corrientes 3247, C1193AAB CABA, Argentina",
+      "coordinates": {
+        "lat": -34.6038,
+        "lng": -58.411
+      }
+    }
   },
   {
-    "packageId": "a6157f29-daab-4c5f-9cfb-d4fe17520f60",
-    "warehouse": "Almacén Oeste",
-    "destinationNeighborhood": "Flores"
+    "id": "8c8d8e04-f58b-4613-8011-5ca8e5917709",
+    "warehouse": {
+      "name": "Almacén Este",
+      "section": "H5",
+      "shelf": "678"
+    },
+    "status": "on_route",
+    "clientName": "Fernando López",
+    "delivery": {
+      "assignedAt": "2025-06-26T08:45:00.000Z",
+      "deliveryPersonId": "550e8400-e29b-41d4-a716-446655440002",
+      "deliveryConfirmationCode": "123456"
+    },
+    "destination": {
+      "neighborhood": "Villa Urquiza",
+      "address": "Av. Triunvirato 4135, C1431FBG CABA, Argentina",
+      "coordinates": {
+        "lat": -34.5704,
+        "lng": -58.4809
+      }
+    }
   },
   {
-    "packageId": "51c3157e-8567-4394-9c29-f284c2e11f21",
-    "warehouse": "Almacén Sur",
-    "destinationNeighborhood": "La Boca"
+    "id": "a6157f29-daab-4c5f-9cfb-d4fe17520f60",
+    "warehouse": {
+      "name": "Almacén Oeste",
+      "section": "I3",
+      "shelf": "23456"
+    },
+    "status": "completed",
+    "clientName": "Valeria Castro",
+    "delivery": {
+      "assignedAt": "2025-06-21T08:00:00.000Z",
+      "deliveredAt": "2025-06-21T13:30:00.000Z",
+      "deliveryPersonId": "550e8400-e29b-41d4-a716-446655440002",
+      "deliveryConfirmationCode": "234567"
+    },
+    "destination": {
+      "neighborhood": "Flores",
+      "address": "Av. Rivadavia 7247, C1406GLA CABA, Argentina",
+      "coordinates": {
+        "lat": -34.628,
+        "lng": -58.4663
+      }
+    }
+  },
+  {
+    "id": "51c3157e-8567-4394-9c29-f284c2e11f21",
+    "warehouse": {
+      "name": "Almacén Sur",
+      "section": "J4",
+      "shelf": "345678"
+    },
+    "status": "pending",
+    "clientName": "Sebastián Torres",
+    "destination": {
+      "neighborhood": "La Boca",
+      "address": "Caminito 315, C1161ADB CABA, Argentina",
+      "coordinates": {
+        "lat": -34.6365,
+        "lng": -58.3634
+      }
+    }
   }
 ]

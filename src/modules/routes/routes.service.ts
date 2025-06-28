@@ -83,7 +83,11 @@ export class RoutesService {
   }
 
   //Assign route to authenticated delivery person
-  assignRoute(routeId: string, authUserEmail: string) {
+  assignRoute(
+    routeId: string,
+    confirmationCode: string,
+    authUserEmail: string,
+  ) {
     //Get user by email
     const user = this.usersRepository.findByEmail(authUserEmail);
     if (!user) {
@@ -100,6 +104,11 @@ export class RoutesService {
       throw new ForbiddenException(
         `Route with ID ${routeId} is not available for assignment`,
       );
+    }
+
+    // Verify assignment confirmation code
+    if (route.assignmentConfirmationCode !== confirmationCode) {
+      throw new ForbiddenException('Invalid assignment confirmation code');
     }
 
     // Update route with assignment details and generate delivery confirmation code

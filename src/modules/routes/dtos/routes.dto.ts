@@ -32,6 +32,7 @@ export class RouteDto {
   id: string;
   warehouse: WarehouseDto;
   status: RouteStatus;
+  assignmentConfirmationCode: string;
   clientName: string;
   delivery?: DeliveryDto;
   destination: DestinationDto;

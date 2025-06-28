@@ -40,9 +40,17 @@ export class RoutesController {
   }
 
   // Assign route to authenticated delivery person
-  @Post(':id/assign')
-  assignRoute(@Param('id') routeId: string, @Req() req: AuthenticatedRequest) {
-    this.routesService.assignRoute(routeId, req.authUserEmail);
+  @Post(':id/assign/:confirmationCode')
+  assignRoute(
+    @Param('id') routeId: string,
+    @Param('confirmationCode') confirmationCode: string,
+    @Req() req: AuthenticatedRequest,
+  ) {
+    this.routesService.assignRoute(
+      routeId,
+      confirmationCode,
+      req.authUserEmail,
+    );
   }
 
   // Mark route as delivered

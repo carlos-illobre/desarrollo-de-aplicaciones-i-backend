@@ -15,7 +15,8 @@
         "lat": -34.5884,
         "lng": -58.3974
       }
-    }
+    },
+    "assignmentConfirmationCode": "152447"
   },
   {
     "id": "ed54f7ab-375f-410f-9961-d6b96d5ad5e4",
@@ -38,7 +39,8 @@
         "lat": -34.5934,
         "lng": -58.3933
       }
-    }
+    },
+    "assignmentConfirmationCode": "575607"
   },
   {
     "id": "768eda0b-44fb-40ab-beea-a33a3c784bcf",
@@ -62,7 +64,8 @@
         "lat": -34.6158,
         "lng": -58.3731
       }
-    }
+    },
+    "assignmentConfirmationCode": "574851"
   },
   {
     "id": "768eda0b-44fb-40ab-beea-a33a3c784bce",
@@ -85,7 +88,8 @@
         "lat": -34.6158,
         "lng": -58.3731
       }
-    }
+    },
+    "assignmentConfirmationCode": "837752"
   },
   {
     "id": "d1d94660-a7b3-47ce-b963-39ab4f0fcc32",
@@ -103,7 +107,8 @@
         "lat": -34.5629,
         "lng": -58.4519
       }
-    }
+    },
+    "assignmentConfirmationCode": "691858"
   },
   {
     "id": "fc7bd8a2-4b55-4a16-bd88-593c5c814eff",
@@ -126,7 +131,8 @@
         "lat": -34.6197,
         "lng": -58.437
       }
-    }
+    },
+    "assignmentConfirmationCode": "660813"
   },
   {
     "id": "0dce39ef-210d-42b3-bc8f-c25efa2185ff",
@@ -150,7 +156,8 @@
         "lat": -34.5988,
         "lng": -58.4373
       }
-    }
+    },
+    "assignmentConfirmationCode": "486018"
   },
   {
     "id": "6ea02831-28ed-4a2f-8529-9108be5a1cd4",
@@ -168,7 +175,8 @@
         "lat": -34.6038,
         "lng": -58.411
       }
-    }
+    },
+    "assignmentConfirmationCode": "416416"
   },
   {
     "id": "8c8d8e04-f58b-4613-8011-5ca8e5917709",
@@ -191,7 +199,8 @@
         "lat": -34.5704,
         "lng": -58.4809
       }
-    }
+    },
+    "assignmentConfirmationCode": "599004"
   },
   {
     "id": "a6157f29-daab-4c5f-9cfb-d4fe17520f60",
@@ -215,7 +224,8 @@
         "lat": -34.628,
         "lng": -58.4663
       }
-    }
+    },
+    "assignmentConfirmationCode": "672518"
   },
   {
     "id": "51c3157e-8567-4394-9c29-f284c2e11f21",
@@ -233,6 +243,7 @@
         "lat": -34.6365,
         "lng": -58.3634
       }
-    }
+    },
+    "assignmentConfirmationCode": "145221"
   }
 ]

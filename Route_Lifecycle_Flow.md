@@ -7,8 +7,8 @@ flowchart TD
     A[Route Created] --> B[Status: PENDING]
     B --> C{Delivery Person Assigns Route}
 
-    C -->|POST /routes/:id/assign| D[Status: ON_ROUTE]
-    C -->|Route Already Assigned/Not Found| E[Assignment Rejected]
+    C -->|POST /routes/:id/assign/:confirmationCode<br/>Valid Assignment Code| D[Status: ON_ROUTE]
+    C -->|Invalid Assignment Code/Unauthorized| E[Assignment Rejected]
     E --> B
 
     D --> F{Route Action}
@@ -42,11 +42,11 @@ sequenceDiagram
     participant Repo as Repository
     participant File as JSON File
 
-    DP->>API: POST /routes/{id}/assign
+    DP->>API: POST /routes/{id}/assign/{confirmationCode}
     API->>Auth: Validate JWT Token
     Auth-->>API: Extract User Email
 
-    API->>Service: assignRoute(id, userEmail)
+    API->>Service: assignRoute(id, confirmationCode, userEmail)
     Service->>Repo: findByEmail(userEmail)
     Repo-->>Service: User Data
     Service->>Repo: findById(id)
@@ -54,6 +54,7 @@ sequenceDiagram
 
     alt Route Available
         Service->>Service: Validate Status = PENDING
+        Service->>Service: Validate Assignment Confirmation Code
         Service->>Service: Generate OTP for Delivery
         Service->>Service: Update Status to ON_ROUTE
         Service->>Repo: updateRoute(id, updatedRoute)
@@ -64,7 +65,7 @@ sequenceDiagram
         API-->>DP: Route Assigned Successfully
     else Route Not Available
         Service-->>API: ForbiddenException
-        API-->>DP: 403 Route Not Available
+        API-->>DP: 403 Invalid Assignment Code or Route Not Available
     end
 ```
 
@@ -138,6 +139,7 @@ graph LR
     A[Route Assignment] --> A1[Route Status = PENDING]
     A --> A2[User Authenticated]
     A --> A3[Route Exists]
+    A --> A4[Valid Assignment Confirmation Code]
 
     B[Route Delivery] --> B1[Route Status = ON_ROUTE]
     B --> B2[User = Assigned Person]

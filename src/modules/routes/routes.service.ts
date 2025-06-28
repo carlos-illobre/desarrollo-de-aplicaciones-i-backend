@@ -23,7 +23,7 @@ export class RoutesService {
 
     return pendingRoutes.map((route) => ({
       id: route.id,
-      warehouseName: route.warehouse.name,
+      warehouse: route.warehouse,
       destinationNeighborhood: route.destination.neighborhood,
     }));
   }

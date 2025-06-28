@@ -1,5 +1,9 @@
 export class PendingRoutesResponseDto {
   id: string;
-  warehouseName: string;
+  warehouse: {
+    name: string;
+    section: string;
+    shelf: string;
+  };
   destinationNeighborhood: string;
 }

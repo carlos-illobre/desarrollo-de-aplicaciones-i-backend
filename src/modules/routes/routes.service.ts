@@ -82,6 +82,30 @@ export class RoutesService {
     return route;
   }
 
+
+  //Get route by ID
+  getPendingRouteById(id: string, authUserEmail: string): RouteDto {
+    //Get user by email
+    const user = this.usersRepository.findByEmail(authUserEmail);
+    if (!user) {
+      throw new NotFoundException(`User with email ${authUserEmail} not found`);
+    }
+    const route = this.routesRepository.findById(id);
+
+    if (!route) {
+      throw new NotFoundException(`Route with ID ${id} not found`);
+    }
+
+    // Check if the user is the delivery person for the route
+    const isDeliveryPerson = route.status === 'pending'
+    if (!isDeliveryPerson) {
+      throw new ForbiddenException(
+        `Authenticated user with id ${user.id} is not authorized to access route with ID ${id}`,
+      );
+    }
+    return route;
+  }
+
   //Assign route to authenticated delivery person
   assignRoute(
     routeId: string,

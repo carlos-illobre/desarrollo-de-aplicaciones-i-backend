@@ -39,6 +39,20 @@ export class RoutesController {
     return new GetAssignedRouteByIdResponse(route);
   }
 
+  // Get assigned route by ID
+  @Get('pending/:id')
+  getPendingRouteById(
+    @Param('id') routeId: string,
+    @Req() req: AuthenticatedRequest,
+  ): GetAssignedRouteByIdResponse {
+    const route = this.routesService.getPendingRouteById(
+      routeId,
+      req.authUserEmail,
+    );
+
+    return new GetAssignedRouteByIdResponse(route);
+  }
+
   // Assign route to authenticated delivery person
   @Post(':id/assign/:confirmationCode')
   assignRoute(

@@ -84,7 +84,7 @@ export class RoutesService {
 
 
   //Get route by ID
-  getUnassignedRouteById(id: string, authUserEmail: string): RouteDto {
+  getPendingRouteById(id: string, authUserEmail: string): RouteDto {
     //Get user by email
     const user = this.usersRepository.findByEmail(authUserEmail);
     if (!user) {

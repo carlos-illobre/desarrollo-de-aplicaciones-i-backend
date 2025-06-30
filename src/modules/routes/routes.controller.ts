@@ -40,12 +40,12 @@ export class RoutesController {
   }
 
   // Get assigned route by ID
-  @Get('unassigned/:id')
-  getUnassignedRouteById(
+  @Get('pending/:id')
+  getPendingRouteById(
     @Param('id') routeId: string,
     @Req() req: AuthenticatedRequest,
   ): GetAssignedRouteByIdResponse {
-    const route = this.routesService.getUnassignedRouteById(
+    const route = this.routesService.getPendingRouteById(
       routeId,
       req.authUserEmail,
     );
